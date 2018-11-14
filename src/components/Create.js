@@ -5,7 +5,7 @@ class Create extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            promotion: [{ default: 0 }],
+            promotion: [],
             name: '',
             desc: '',
             type: '',
@@ -18,8 +18,10 @@ class Create extends Component {
     }
     sendCreate = e => {
         e.preventDefault()
-        this.props.history.push('/')
-        // Post to server & Redirect
+        if(this.state.name!=='' && this.state.desc!=='' &&this.state.type!=='' &&this.state.promotion!==[]){
+            this.props.history.push('/')
+            // Post to server & Redirect
+        }
     }
     render() {
         return (

@@ -17,7 +17,10 @@ class Edit extends Component {
     }
     sendEdit = e => {
         e.preventDefault()
+        if(this.state.name!=='' && this.state.desc!=='' &&this.state.type!=='' )
+        {
         this.props.history.push('/manage')
+    }
         // Post to server & Redirect
     }
     render() {
