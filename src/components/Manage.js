@@ -9,7 +9,7 @@ class Manage extends Component {
         }
     }
     componentDidMount() {
-        //fetchData & setState
+        // fetchData & setState
     }
     renderPromotion = () => {
         // View results format & Add Edit and Delete
