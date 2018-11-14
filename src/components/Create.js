@@ -5,18 +5,21 @@ class Create extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            promotion: [],
+            promotion: [{ default: 0 }],
             name: '',
             desc: '',
             type: '',
-            reward_item: '',
-            reward_percent: '',
-            gift_name: '',
-            gift_weight: '',
-            gift_stock: ''
+            reward_item: '0',
+            reward_percent: '0',
+            gift_name: '0',
+            gift_weight: '0',
+            gift_stock: '0'
         }
     }
-    sendCreate = () => {
+
+    sendCreate = e => {
+        e.preventDefault()
+        this.props.history.push('/')
         // Post to server & Redirect
     }
     render() {
@@ -183,7 +186,9 @@ class Create extends Component {
                     <button
                         type="submit"
                         className="btn btn-primary"
-                        onClick={this.sendCreate()}
+                        onClick={e => {
+                            this.sendCreate(e)
+                        }}
                     >
                         Submit
                     </button>

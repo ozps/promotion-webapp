@@ -6,7 +6,10 @@ class Main extends Component {
         super(props)
         this.state = {
             query: '',
-            promotion: []
+            promotion: [
+                { name: 'Store1', type: 'Reward', desc: 'Desc1' },
+                { name: 'Store2', type: 'Reward', desc: 'Desc2' }
+            ]
         }
     }
     sendQuery = async () => {
@@ -14,6 +17,7 @@ class Main extends Component {
         if (temp !== '') {
             await this.setState({
                 query: temp
+                // promotion: [{ name: 'Store5', type: 'Reward', desc: 'Desc5' }]
             })
             // fetchQuery
             document.querySelector('input').value = ''
@@ -21,7 +25,17 @@ class Main extends Component {
         console.log(this.state.query)
     }
     renderPromotion = () => {
-        // View results format
+        if (this.state.promotion !== []) {
+            return this.state.promotion.map(x => {
+                return (
+                    <tr key={x.name}>
+                        <td>{x.name}</td>
+                        <td>{x.type}</td>
+                        <td>{x.desc}</td>
+                    </tr>
+                )
+            })
+        }
     }
     render() {
         return (
@@ -73,7 +87,22 @@ class Main extends Component {
                         </button>
                     </div>
                 </div>
-                <ul className="list-group">{this.renderPromotion()}</ul>
+                <div className="container">
+                    <table className="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th style={{ textAlign: 'center' }}>
+                                    Store Name
+                                </th>
+                                <th style={{ textAlign: 'center' }}>Type</th>
+                                <th style={{ textAlign: 'center' }}>
+                                    Promotion
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>{this.renderPromotion()}</tbody>
+                    </table>
+                </div>
             </React.Fragment>
         )
     }
