@@ -87,22 +87,26 @@ class Main extends Component {
                         </button>
                     </div>
                 </div>
-                <div className="container">
-                    <table className="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th style={{ textAlign: 'center' }}>
-                                    Store Name
-                                </th>
-                                <th style={{ textAlign: 'center' }}>Type</th>
-                                <th style={{ textAlign: 'center' }}>
-                                    Promotion
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>{this.renderPromotion()}</tbody>
-                    </table>
-                </div>
+                {this.state.promotion.length !== 0 && (
+                    <div className="container">
+                        <table className="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Store Name
+                                    </th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Type
+                                    </th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Promotion
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>{this.renderPromotion()}</tbody>
+                        </table>
+                    </div>
+                )}
             </React.Fragment>
         )
     }

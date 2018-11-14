@@ -6,16 +6,17 @@ class Manage extends Component {
         super(props)
         this.state = {
             promotion: [
-                { id: '1', name: 'Store1', type: 'Reward', desc: 'Desc1' },
-                { id: '2', name: 'Store2', type: 'Reward', desc: 'Desc2' }
+                { name: 'Store1', type: 'Reward', desc: 'Desc1' },
+                { name: 'Store2', type: 'Reward', desc: 'Desc2' }
             ]
         }
+        // console.log(this.state.promotion.length)
     }
     componentDidMount() {
         // fetchData & setState
     }
     renderPromotion = () => {
-        if (this.state.promotion !== []) {
+        if (this.state.promotion.length !== 0) {
             return this.state.promotion.map(x => {
                 return (
                     <tr key={x.name}>
@@ -61,23 +62,29 @@ class Manage extends Component {
             <React.Fragment>
                 <Header isHidden={false} path={'/'} />
                 <h1 style={{ margin: 30 }}>List of all promotions</h1>
-                <div class="container">
-                    <table className="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th style={{ textAlign: 'center' }}>
-                                    Store Name
-                                </th>
-                                <th style={{ textAlign: 'center' }}>Type</th>
-                                <th style={{ textAlign: 'center' }}>
-                                    Promotion
-                                </th>
-                                <th style={{ textAlign: 'center' }}>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>{this.renderPromotion()}</tbody>
-                    </table>
-                </div>
+                {this.state.promotion.length !== 0 && (
+                    <div className="container">
+                        <table className="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Store Name
+                                    </th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Type
+                                    </th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Promotion
+                                    </th>
+                                    <th style={{ textAlign: 'center' }}>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>{this.renderPromotion()}</tbody>
+                        </table>
+                    </div>
+                )}
             </React.Fragment>
         )
     }
