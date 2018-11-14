@@ -45,13 +45,17 @@ class Main extends Component {
                         Manage Promotions
                     </a>
                 </div>
-                <div className="input-group mb-3" id="main-query">
+                <div
+                    align="center"
+                    className="input-group mb-3"
+                    id="main-query"
+                >
                     <input
                         type="text"
                         className="form-control" // Cant apply CSS
                         placeholder="Query"
-                        aria-label="Query"
                         aria-describedby="button-addon2"
+                        style={{ maxWidth: 600 }}
                         onKeyUp={e => {
                             if (e.key === 'Enter') {
                                 this.sendQuery()
