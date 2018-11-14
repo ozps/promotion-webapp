@@ -9,17 +9,16 @@ class Main extends Component {
             promotion: []
         }
     }
-    sendQuery = () => {
+    sendQuery = async () => {
         let temp = document.querySelector('input').value
-        console.log(temp)
         if (temp !== '') {
-            this.setState({
+            await this.setState({
                 query: temp
             })
             // fetchQuery
             document.querySelector('input').value = ''
         }
-        console.log(this.state.query) // State delay??
+        console.log(this.state.query)
     }
     renderPromotion = () => {
         // View results format
@@ -53,7 +52,7 @@ class Main extends Component {
                         placeholder="Query"
                         aria-label="Query"
                         aria-describedby="button-addon2"
-                        onKeyPress={e => {
+                        onKeyUp={e => {
                             if (e.key === 'Enter') {
                                 this.sendQuery()
                             }
