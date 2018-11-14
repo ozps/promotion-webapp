@@ -16,7 +16,6 @@ class Create extends Component {
             gift_stock: '0'
         }
     }
-
     sendCreate = e => {
         e.preventDefault()
         this.props.history.push('/')

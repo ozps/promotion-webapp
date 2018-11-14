@@ -15,7 +15,9 @@ class Edit extends Component {
             gift_stock: ''
         }
     }
-    sendEdit = () => {
+    sendEdit = e => {
+        e.preventDefault()
+        this.props.history.push('/manage')
         // Post to server & Redirect
     }
     render() {
@@ -174,7 +176,7 @@ class Edit extends Component {
                     <button
                         type="submit"
                         className="btn btn-primary"
-                        onClick={this.sendEdit()}
+                        onClick={e => this.sendEdit(e)}
                     >
                         Submit
                     </button>

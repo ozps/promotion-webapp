@@ -26,14 +26,15 @@ class Manage extends Component {
                         <td style={{ textAlign: 'center' }}>
                             <button
                                 type="button"
-                                class="btn btn-outline-success btn-sm"
+                                className="btn btn-outline-success btn-sm"
                                 style={{ width: 80 }}
+                                onClick={() => this.props.history.push('/edit')}
                             >
                                 Edit
                             </button>
                             <button
                                 type="button"
-                                class="btn btn-outline-danger btn-sm"
+                                className="btn btn-outline-danger btn-sm"
                                 style={{ width: 80 }}
                                 onClick={() => {
                                     // Send delete to server & Fetch data and setState
@@ -49,7 +50,7 @@ class Manage extends Component {
                                     })
                                 }}
                             >
-                                Danger
+                                Delete
                             </button>
                         </td>
                     </tr>
