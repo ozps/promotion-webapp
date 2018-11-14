@@ -17,7 +17,7 @@ class Edit extends Component {
     }
     sendEdit = e => {
         e.preventDefault()
-        if(this.state.name!=='' && this.state.desc!=='' &&this.state.type!=='' &&this.state.promotion!==[])
+        if(this.state.name!=='' && this.state.desc!=='' &&this.state.type!=='' )
         {
         this.props.history.push('/manage')
     }
