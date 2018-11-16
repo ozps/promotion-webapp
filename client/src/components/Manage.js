@@ -33,6 +33,7 @@ class Manage extends Component {
         })
     }
     renderPromotion = () => {
+        console.log(this.state.promotion)
         if (this.state.promotion.length !== 0) {
             return this.state.promotion.map(x => {
                 return (
@@ -46,8 +47,14 @@ class Manage extends Component {
                                 className="btn btn-outline-success btn-sm"
                                 style={{ width: 80 }}
                                 onClick={e => {
-                                    localStorage.editProID = x.PromotionID
-                                    this.props.history.push('/edit')
+                                    this.props.history.push({
+                                        pathname: '/edit',
+                                        state: {
+                                            storeName: x.StoreName,
+                                            promotionName: x.PromotionName,
+                                            promotionDesc: x.PromotionDesc
+                                        }
+                                    })
                                 }}
                             >
                                 Edit

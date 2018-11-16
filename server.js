@@ -18,11 +18,9 @@ var connection = mysql.createConnection({
 
 connection.connect()
 
-console.log(connection)
-
 app.post('/api/list_promotion', (req, res) => {
     var sql =
-        'SELECT s.StoreName, p.PromotionType, p.PromotionDesc, p.PromotionID FROM Promotion as p left join Store as s on s.StoreID = p.StoreID'
+        'SELECT s.StoreName, p.PromotionName, p.PromotionType, p.PromotionDesc, p.PromotionID FROM Promotion as p left join Store as s on s.StoreID = p.StoreID'
 
     connection.query(sql, function(error, results, fields) {
         if (error) throw error

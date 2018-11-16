@@ -127,7 +127,11 @@ class Edit extends Component {
                 <form className="form-container">
                     <div className="form-group">
                         <label>
-                            <strong>Store Name</strong>
+                            <h2>
+                                {`Store : ${
+                                    this.props.location.state.storeName
+                                }`}
+                            </h2>
                         </label>
                     </div>
                     <div className="form-group">
@@ -139,9 +143,11 @@ class Edit extends Component {
                             className="form-control"
                             placeholder="Name"
                             style={{ maxWidth: 600 }}
-                            value={this.state.name}
+                            placeholder={
+                                this.props.location.state.promotionName
+                            }
                             onChange={e => {
-                                this.setState({ name: e.target.value })
+                                this.setState({ storeName: e.target.value })
                             }}
                         />
                     </div>
@@ -154,7 +160,9 @@ class Edit extends Component {
                             className="form-control"
                             placeholder="Description"
                             style={{ maxWidth: 600 }}
-                            value={this.state.desc}
+                            placeholder={
+                                this.props.location.state.promotionDesc
+                            }
                             onChange={e => {
                                 this.setState({ desc: e.target.value })
                             }}
