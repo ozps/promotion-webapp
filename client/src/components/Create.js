@@ -5,24 +5,66 @@ class Create extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            promotion: [],
+            storeList: [],
             name: '',
             desc: '',
             type: '',
-            reward_item: '0',
-            reward_percent: '0',
+            discount_item: '0',
+            discount_percent: '0',
             gift_name: '0',
             gift_weight: '0',
-            gift_stock: '0'
+            gift_stock: '0',
+            gift_type: '',
+            storeID: -1
         }
+    }
+    componentDidMount() {
+        this.updateStoreList()
+    }
+    updateStoreList = async () => {
+        const response = await fetch('/api/list_store', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const results = await response.json()
+        await this.setState({ storeList: results })
+        if (this.option1.childNodes[0].attributes['storeid'])
+            this.setState({
+                storeID: this.option1.childNodes[0].attributes['storeid'].value
+            })
     }
     sendCreate = e => {
         e.preventDefault()
-        if(this.state.name!=='' && this.state.desc!=='' &&this.state.type!=='' &&this.state.promotion!==[]){
+        if (this.state.name !== '' && this.state.desc !== '') {
+            fetch('/api/create_promotion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state)
+            })
             this.props.history.push('/')
-            // Post to server & Redirect
         }
     }
+    storeChanged = e => {
+        var index = e.target.selectedIndex
+        var optionElement = e.target.childNodes[index]
+        this.setState({ storeID: optionElement.getAttribute('storeid') })
+    }
+    renderStoreList = () => {
+        if (this.state.storeList !== []) {
+            return this.state.storeList.map(x => {
+                return (
+                    <option key={x.storeString} storeid={x.storeID}>
+                        {x.storeString}
+                    </option>
+                )
+            })
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -34,12 +76,14 @@ class Create extends Component {
                             <strong>Store</strong>
                         </label>
                         <select
+                            ref={ref => (this.option1 = ref)}
                             className="form-control"
                             style={{ maxWidth: 600 }}
+                            onChange={e => {
+                                this.storeChanged(e)
+                            }}
                         >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            {this.renderStoreList()}
                         </select>
                     </div>
                     <div className="form-group">
@@ -75,11 +119,11 @@ class Create extends Component {
                             className="form-check-input"
                             type="radio"
                             name="inlineRadioOptions"
-                            value="Reward"
-                            onClick={() => this.setState({ type: 'Reward' })}
+                            value="Discount"
+                            onClick={() => this.setState({ type: 'Discount' })}
                         />
                         <label className="form-check-label">
-                            <strong>Reward/Discount</strong>
+                            <strong>Discount</strong>
                         </label>
                     </div>
                     <div className="form-check form-check-inline">
@@ -94,8 +138,20 @@ class Create extends Component {
                             <strong>Gift</strong>
                         </label>
                     </div>
+                    <div className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            value="None"
+                            onClick={() => this.setState({ type: '' })}
+                        />
+                        <label className="form-check-label">
+                            <strong>None</strong>
+                        </label>
+                    </div>
                     <div className="form-group form-check">
-                        {this.state.type === 'Reward' && (
+                        {this.state.type === 'Discount' && (
                             <div className="form-group form-sub">
                                 <div className="form-group">
                                     <label>
@@ -108,7 +164,7 @@ class Create extends Component {
                                         style={{ maxWidth: 300 }}
                                         onChange={e => {
                                             this.setState({
-                                                reward_item: e.target.value
+                                                discount_item: e.target.value
                                             })
                                         }}
                                     />
@@ -124,7 +180,7 @@ class Create extends Component {
                                         style={{ maxWidth: 300 }}
                                         onChange={e => {
                                             this.setState({
-                                                reward_percent: e.target.value
+                                                discount_percent: e.target.value
                                             })
                                         }}
                                     />
@@ -145,6 +201,22 @@ class Create extends Component {
                                         onChange={e => {
                                             this.setState({
                                                 gift_name: e.target.value
+                                            })
+                                        }}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>
+                                        <strong>Type</strong>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Type"
+                                        style={{ maxWidth: 300 }}
+                                        onChange={e => {
+                                            this.setState({
+                                                gift_type: e.target.value
                                             })
                                         }}
                                     />

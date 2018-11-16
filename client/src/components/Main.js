@@ -4,34 +4,36 @@ import Header from './Header'
 class Main extends Component {
     constructor(props) {
         super(props)
+
         this.state = {
             query: '',
-            promotion: [
-                { name: 'Store1', type: 'Reward', desc: 'Desc1' },
-                { name: 'Store2', type: 'Reward', desc: 'Desc2' }
-            ]
+            promotion: []
         }
     }
+    componentDidMount() {
+        this.sendQuery()
+    }
     sendQuery = async () => {
-        let temp = document.querySelector('input').value
-        if (temp !== '') {
-            await this.setState({
-                query: temp
-                // promotion: [{ name: 'Store5', type: 'Reward', desc: 'Desc5' }]
-            })
-            // fetchQuery
-            document.querySelector('input').value = ''
-        }
-        console.log(this.state.query)
+        let temp = await document.querySelector('input').value
+        const response = await fetch('/api/list_promotion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: temp })
+        })
+        const results = await response.json()
+
+        this.setState({ query: temp, promotion: results })
     }
     renderPromotion = () => {
         if (this.state.promotion !== []) {
             return this.state.promotion.map(x => {
                 return (
-                    <tr key={x.name}>
-                        <td>{x.name}</td>
-                        <td>{x.type}</td>
-                        <td>{x.desc}</td>
+                    <tr key={x.PromotionID}>
+                        <td>{x.StoreName}</td>
+                        <td>{x.PromotionType ? x.PromotionType : '-'}</td>
+                        <td>{x.PromotionDesc}</td>
                     </tr>
                 )
             })

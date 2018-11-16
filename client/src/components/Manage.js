@@ -5,30 +5,50 @@ class Manage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            promotion: [
-                { name: 'Store1', type: 'Reward', desc: 'Desc1' },
-                { name: 'Store2', type: 'Reward', desc: 'Desc2' }
-            ]
+            promotion: []
         }
         // console.log(this.state.promotion.length)
     }
     componentDidMount() {
-        // fetchData & setState
+        this.getProList()
+    }
+    getProList = async () => {
+        const response = await fetch('/api/list_promotion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text: '' })
+        })
+        const results = await response.json()
+        await this.setState({ promotion: results })
+    }
+    sendDeleteReq = async proID => {
+        const response = await fetch('/api/delete_promotion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ toDelete: proID })
+        })
     }
     renderPromotion = () => {
         if (this.state.promotion.length !== 0) {
             return this.state.promotion.map(x => {
                 return (
-                    <tr key={x.name}>
-                        <td>{x.name}</td>
-                        <td>{x.type}</td>
-                        <td>{x.desc}</td>
+                    <tr key={x.StoreName + ' ' + x.PromotionID}>
+                        <td>{x.StoreName}</td>
+                        <td>{x.PromotionType ? x.PromotionType : '-'}</td>
+                        <td>{x.PromotionDesc}</td>
                         <td style={{ textAlign: 'center' }}>
                             <button
                                 type="button"
                                 className="btn btn-outline-success btn-sm"
                                 style={{ width: 80 }}
-                                onClick={() => this.props.history.push('/edit')}
+                                onClick={e => {
+                                    localStorage.editProID = x.PromotionID
+                                    this.props.history.push('/edit')
+                                }}
                             >
                                 Edit
                             </button>
@@ -37,17 +57,8 @@ class Manage extends Component {
                                 className="btn btn-outline-danger btn-sm"
                                 style={{ width: 80 }}
                                 onClick={() => {
-                                    // Send delete to server & Fetch data and setState
-                                    this.setState({
-                                        promotion: [
-                                            {
-                                                id: '7',
-                                                name: 'Store7',
-                                                type: 'Reward',
-                                                desc: 'Desc7'
-                                            }
-                                        ]
-                                    })
+                                    this.sendDeleteReq(x.PromotionID)
+                                    this.getProList()
                                 }}
                             >
                                 Delete
