@@ -19,7 +19,7 @@ class Edit extends Component {
         }
     }
     componentDidMount() {
-        this.getPro()
+        if (localStorage.checkSession === '1') this.getPro()
     }
     deleteAll = async () => {
         const response = await fetch('/api/delete_promotion_type', {
@@ -120,9 +120,9 @@ class Edit extends Component {
         })
     }
     render() {
-        return (
+        return localStorage.checkSession === '1' ? (
             <React.Fragment>
-                <Header isHidden={false} path={'/'} />
+                <Header isHidden={false} />
                 <h1 className="form-title">Edit Promotion</h1>
                 <form className="form-container">
                     <div className="form-group">
@@ -330,6 +330,8 @@ class Edit extends Component {
                     </button>
                 </form>
             </React.Fragment>
+        ) : (
+            <h1 className="container">Please Login</h1>
         )
     }
 }

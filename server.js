@@ -18,6 +18,20 @@ var connection = mysql.createConnection({
 
 connection.connect()
 
+app.post('/api/check_login', (req, res) => {
+    var sql = `SELECT COUNT(*) as Status FROM User WHERE username='${
+        req.body.user
+    }' AND password='${req.body.pass}'`
+    // console.log(sql)
+    connection.query(sql, function(error, results) {
+        if (error) throw error
+        var users = JSON.parse(JSON.stringify(results[0]))
+        //console.log(users.Status)
+        res.contentType('application/json')
+        res.send(users)
+    })
+})
+
 app.post('/api/list_promotion', (req, res) => {
     var sql =
         'SELECT s.StoreName, p.PromotionName, p.PromotionType, p.PromotionDesc, p.PromotionID FROM Promotion as p left join Store as s on s.StoreID = p.StoreID'

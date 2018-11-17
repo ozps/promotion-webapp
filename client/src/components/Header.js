@@ -1,20 +1,23 @@
 import React from 'react'
 
-const Header = ({ isHidden, path }) => {
+const Header = ({ isHidden }) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="/">
+            <a className="navbar-brand" href="/main">
                 <strong>Half Night Miracle</strong>
             </a>
             <span className="navbar-nav mr-auto" />
             {!isHidden && (
                 <a
-                    href={path}
+                    href="/"
                     className="btn btn-secondary btn-lg active btn-sm"
                     role="button"
                     aria-pressed="true"
+                    onClick={() => {
+                        localStorage.checkSession = 0
+                    }}
                 >
-                    Back
+                    Logout
                 </a>
             )}
         </nav>

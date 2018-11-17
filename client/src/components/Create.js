@@ -19,7 +19,7 @@ class Create extends Component {
         }
     }
     componentDidMount() {
-        this.updateStoreList()
+        if (localStorage.checkSession === '1') this.updateStoreList()
     }
     updateStoreList = async () => {
         const response = await fetch('/api/list_store', {
@@ -45,7 +45,7 @@ class Create extends Component {
                 },
                 body: JSON.stringify(this.state)
             })
-            this.props.history.push('/')
+            this.props.history.push('/main')
         }
     }
     storeChanged = e => {
@@ -64,11 +64,10 @@ class Create extends Component {
             })
         }
     }
-
     render() {
-        return (
+        return localStorage.checkSession === '1' ? (
             <React.Fragment>
-                <Header isHidden={false} path={'/'} />
+                <Header isHidden={false} />
                 <h1 className="form-title">Create Promotion</h1>
                 <form className="form-container">
                     <div className="form-group">
@@ -267,6 +266,8 @@ class Create extends Component {
                     </button>
                 </form>
             </React.Fragment>
+        ) : (
+            <h1 className="container">Please Login</h1>
         )
     }
 }

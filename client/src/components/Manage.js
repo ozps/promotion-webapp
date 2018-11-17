@@ -10,7 +10,7 @@ class Manage extends Component {
         // console.log(this.state.promotion.length)
     }
     componentDidMount() {
-        this.getProList()
+        if (localStorage.checkSession === '1') this.getProList()
     }
     getProList = async () => {
         const response = await fetch('/api/list_promotion', {
@@ -33,7 +33,7 @@ class Manage extends Component {
         })
     }
     renderPromotion = () => {
-        console.log(this.state.promotion)
+        // console.log(this.state.promotion)
         if (this.state.promotion.length !== 0) {
             return this.state.promotion.map(x => {
                 return (
@@ -47,6 +47,7 @@ class Manage extends Component {
                                 className="btn btn-outline-success btn-sm"
                                 style={{ width: 80 }}
                                 onClick={e => {
+                                    localStorage.editProID = x.PromotionID
                                     this.props.history.push({
                                         pathname: '/edit',
                                         state: {
@@ -77,9 +78,10 @@ class Manage extends Component {
         }
     }
     render() {
-        return (
+        //console.log(localStorage.checkSession)
+        return localStorage.checkSession === '1' ? (
             <React.Fragment>
-                <Header isHidden={false} path={'/'} />
+                <Header isHidden={false} />
                 <h1 style={{ margin: 30 }}>List of all promotions</h1>
                 {this.state.promotion.length !== 0 && (
                     <div className="container">
@@ -105,6 +107,8 @@ class Manage extends Component {
                     </div>
                 )}
             </React.Fragment>
+        ) : (
+            <h1 className="container">Please Login</h1>
         )
     }
 }

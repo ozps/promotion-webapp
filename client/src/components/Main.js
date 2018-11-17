@@ -4,14 +4,13 @@ import Header from './Header'
 class Main extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             query: '',
             promotion: []
         }
     }
     componentDidMount() {
-        this.sendQuery()
+        if (localStorage.checkSession === '1') this.sendQuery()
     }
     sendQuery = async () => {
         let temp = await document.querySelector('input').value
@@ -23,7 +22,6 @@ class Main extends Component {
             body: JSON.stringify({ text: temp })
         })
         const results = await response.json()
-
         this.setState({ query: temp, promotion: results })
     }
     renderPromotion = () => {
@@ -40,9 +38,9 @@ class Main extends Component {
         }
     }
     render() {
-        return (
+        return localStorage.checkSession === '1' ? (
             <React.Fragment>
-                <Header isHidden={true} />
+                <Header isHidden={false} />
                 <div className="container" id="main-dashboard">
                     <a
                         href="/create"
@@ -110,6 +108,8 @@ class Main extends Component {
                     </div>
                 )}
             </React.Fragment>
+        ) : (
+            <h1 className="container">Please Login</h1>
         )
     }
 }
