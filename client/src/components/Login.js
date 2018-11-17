@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Header from './Header'
 
 class Login extends Component {
     constructor(props) {
@@ -9,8 +10,6 @@ class Login extends Component {
             pass: ''
         }
     }
-    // ปุ่ม form ส่งให้ server check sqlที่ inject ได้
-    // ตอบกลับok ก้อเช็ตเปน '1' ถ้าไม่ก้อ redirect '/'
     sendLogin = async e => {
         e.preventDefault()
         if (this.state.user !== '' && this.state.pass !== '') {
@@ -22,7 +21,6 @@ class Login extends Component {
                 body: JSON.stringify(this.state)
             })
             const results = await response.json()
-            // console.log(results)
             if (results.Status === 1) {
                 localStorage.checkSession = '1'
                 this.props.history.push('/main')
@@ -35,8 +33,13 @@ class Login extends Component {
     render() {
         return (
             <React.Fragment>
+                <Header isHidden={true} />
                 <center>
-                    <form className="form-container" id="form-login">
+                    <form
+                        className="form-container"
+                        id="form-login"
+                        style={{ margin: 50 }}
+                    >
                         <div className="form-group">
                             <label style={{ marginRight: 320 }}>
                                 <strong>Username</strong>

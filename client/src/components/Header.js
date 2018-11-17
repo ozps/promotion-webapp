@@ -3,9 +3,16 @@ import React from 'react'
 const Header = ({ isHidden }) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="/main">
-                <strong>Half Night Miracle</strong>
-            </a>
+            {localStorage.checkSession === '1' ? (
+                <a className="navbar-brand" href="/main">
+                    <strong>Half Night Miracle</strong>
+                </a>
+            ) : (
+                <span className="navbar-brand" href="/main">
+                    <strong>Half Night Miracle</strong>
+                </span>
+            )}
+
             <span className="navbar-nav mr-auto" />
             {!isHidden && (
                 <a
