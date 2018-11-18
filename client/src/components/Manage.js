@@ -82,9 +82,11 @@ class Manage extends Component {
         return localStorage.checkSession === '1' ? (
             <React.Fragment>
                 <Header isHidden={false} />
-                <h1 style={{ margin: 30 }}>List of all promotions</h1>
+                <h1 style={{ margin: 30 }}>
+                    <span class="badge badge-light ">All Promotions</span>
+                </h1>
                 {this.state.promotion.length !== 0 && (
-                    <div className="container">
+                    <div className="container" style={{ marginTop: 50 }}>
                         <table className="table table-hover table-bordered">
                             <thead>
                                 <tr>

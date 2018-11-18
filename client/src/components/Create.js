@@ -68,7 +68,9 @@ class Create extends Component {
         return localStorage.checkSession === '1' ? (
             <React.Fragment>
                 <Header isHidden={false} />
-                <h1 className="form-title">Create Promotion</h1>
+                <h1 className="form-title">
+                    <span class="badge badge-light ">Create Promotion</span>
+                </h1>
                 <form className="form-container">
                     <div className="form-group">
                         <label>
@@ -262,7 +264,7 @@ class Create extends Component {
                             this.sendCreate(e)
                         }}
                     >
-                        Submit
+                        Create
                     </button>
                 </form>
             </React.Fragment>

@@ -6,11 +6,15 @@ class Main extends Component {
         super(props)
         this.state = {
             query: '',
-            promotion: []
+            promotion: [],
+            show: false
         }
     }
     componentDidMount() {
         if (localStorage.checkSession === '1') this.sendQuery()
+    }
+    handleHide() {
+        this.setState({ show: false })
     }
     sendQuery = async () => {
         let temp = await document.querySelector('input').value
@@ -26,15 +30,13 @@ class Main extends Component {
     }
     renderPromotion = () => {
         if (this.state.promotion !== []) {
-            return this.state.promotion.map(x => {
-                return (
-                    <tr key={x.PromotionID}>
-                        <td>{x.StoreName}</td>
-                        <td>{x.PromotionType ? x.PromotionType : '-'}</td>
-                        <td>{x.PromotionDesc}</td>
-                    </tr>
-                )
-            })
+            return this.state.promotion.map(x => (
+                <tr key={x.PromotionID}>
+                    <td>{x.StoreName}</td>
+                    <td>{x.PromotionType ? x.PromotionType : '-'}</td>
+                    <td>{x.PromotionDesc}</td>
+                </tr>
+            ))
         }
     }
     render() {
@@ -44,17 +46,19 @@ class Main extends Component {
                 <div className="container" id="main-dashboard">
                     <a
                         href="/create"
-                        className="btn btn-outline-primary btn-lg main-button"
+                        className="btn btn-outline-primary btn-lg"
                         role="button"
                         aria-pressed="true"
+                        style={{ marginRight: 20 }}
                     >
                         Create Promotions
                     </a>
                     <a
                         href="/manage"
-                        className="btn btn-outline-primary btn-lg main-button"
+                        className="btn btn-outline-primary btn-lg"
                         role="button"
                         aria-pressed="true"
+                        style={{ marginLeft: 20 }}
                     >
                         Manage Promotions
                     </a>
@@ -89,7 +93,10 @@ class Main extends Component {
                 </div>
                 {this.state.promotion.length !== 0 && (
                     <div className="container">
-                        <table className="table table-hover table-bordered">
+                        <table
+                            className="table table-hover table-bordered"
+                            style={{ marginTop: 40 }}
+                        >
                             <thead>
                                 <tr>
                                     <th style={{ textAlign: 'center' }}>

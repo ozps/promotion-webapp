@@ -123,15 +123,15 @@ class Edit extends Component {
         return localStorage.checkSession === '1' ? (
             <React.Fragment>
                 <Header isHidden={false} />
-                <h1 className="form-title">Edit Promotion</h1>
+                <h1 className="form-title">
+                    <span class="badge badge-light ">Edit Promotion</span>
+                </h1>
                 <form className="form-container">
-                    <div className="form-group">
+                    <div className="form-group" style={{ marginBottom: 10 }}>
                         <label>
-                            <h2>
-                                {`Store : ${
-                                    this.props.location.state.storeName
-                                }`}
-                            </h2>
+                            <h4>{`Store : ${
+                                this.props.location.state.storeName
+                            }`}</h4>
                         </label>
                     </div>
                     <div className="form-group">
@@ -326,7 +326,7 @@ class Edit extends Component {
                         className="btn btn-primary"
                         onClick={e => this.sendEdit(e)}
                     >
-                        Submit
+                        Edit
                     </button>
                 </form>
             </React.Fragment>

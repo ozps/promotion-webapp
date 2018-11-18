@@ -7,7 +7,9 @@ In the project directory, you can run:
 To start Promotion-Webapp
 
 You must install:
-MAMP or other local web servers.
+
+-MAMP or other local web servers.
+-yarn
 
 You need to :
 

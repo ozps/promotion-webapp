@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Helmet } from 'react-helmet'
 import Header from './Header'
 
 class Login extends Component {
@@ -32,14 +33,16 @@ class Login extends Component {
     }
     render() {
         return (
-            <React.Fragment>
+            <React.Fragment className="bg-secondary">
+                <Helmet
+                    bodyAttributes={{ style: 'background-color : #778899' }}
+                />
                 <Header isHidden={true} />
                 <center>
-                    <form
-                        className="form-container"
-                        id="form-login"
-                        style={{ margin: 50 }}
-                    >
+                    <h1 style={{ margin: 50 }}>
+                        <span class="badge badge-dark">Promotion WebApp</span>
+                    </h1>
+                    <form id="form-main" style={{ maxWidth: 400 }}>
                         <div className="form-group">
                             <label style={{ marginRight: 320 }}>
                                 <strong>Username</strong>
@@ -70,7 +73,7 @@ class Login extends Component {
                         </div>
                         <button
                             type="submit"
-                            className="btn btn-primary"
+                            className="btn btn-outline-primary"
                             onClick={e => {
                                 this.sendLogin(e)
                             }}
