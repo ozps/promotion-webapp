@@ -8,9 +8,9 @@ To start Promotion-Webapp
 
 You need to :
 
-1.  create mySQL Database using dbproject.sql in config folder.
-2.  create user who can access database.
-3.  create Table User which consists of user records(username and password).
+1.  create mySQL Database using dbproject.sql in config folder
+2.  create user who can access database
+3.  create Table User which consists of user records(username and password)
 
     <table>
         <tr>
@@ -23,21 +23,21 @@ You need to :
         </tr>
     </table>
 
-4.  create dbconnect.js in config folder.
+4.  create dbconnect.js in config folder
     <br />
     Example
     module.exports = {
     host: 'localhost',
     user: 'root',
-    pass: 'YOURPASSWORD',
-    database: 'YOURDBNAME',
+    pass: 'PASSWORD',
+    database: 'DBNAME',
     port: '8889' 
     }
     
- 5.  npm install at project path and client folder.
+ 5.  npm install at project path and client folder
  6.  npm install -g yarn
- 7.  Finally, type "npm run dev" at project path to start app.
+ 7.  Finally, type "npm run dev" at project path to start app
  
  Note! If you use mySQL Workbench, you need to run this:
  
- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOURPASSWORD';
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PASSWORD';
