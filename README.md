@@ -28,12 +28,16 @@ You need to :
     Example
     module.exports = {
     host: 'localhost',
-    user: 'username',
-    pass: 'password',
-    database: 'dbname',
-    port: '8889'
+    user: 'root',
+    pass: 'YOURPASSWORD',
+    database: 'YOURDBNAME',
+    port: '8889' 
     }
     
  5.  npm install at project path and client folder.
  6.  npm install -g yarn
  7.  Finally, type "npm run dev" at project path to start app.
+ 
+ Note! If you use mySQL Workbench, you need to run this:
+ 
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOURPASSWORD';
