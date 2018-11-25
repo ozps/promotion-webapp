@@ -19,9 +19,7 @@ class Edit extends Component {
         }
     }
     componentDidMount() {
-        if (localStorage.checkSession === '1') {
-            this.getPro()
-        }
+        if (localStorage.checkSession === '1') this.getPro()
     }
     deleteAll = async () => {
         const response = await fetch('/api/delete_promotion_type', {
