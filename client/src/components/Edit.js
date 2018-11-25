@@ -19,7 +19,9 @@ class Edit extends Component {
         }
     }
     componentDidMount() {
-        if (localStorage.checkSession === '1') this.getPro()
+        if (localStorage.checkSession === '1') {
+            this.getPro()
+        }
     }
     deleteAll = async () => {
         const response = await fetch('/api/delete_promotion_type', {
@@ -83,15 +85,17 @@ class Edit extends Component {
     }
     sendEdit = e => {
         e.preventDefault()
-        this.editPro()
-        if (this.state.type !== this.state.new_type) {
-            this.deleteAll()
-            this.addDetail()
-        } else {
-            if (this.state.new_type === 'Gift') this.editGift()
-            else if (this.state.new_type === 'Discount') this.editDiscount()
+        if (this.state.storeName !== '' && this.state.desc !== '') {
+            this.editPro()
+            if (this.state.type !== this.state.new_type) {
+                this.deleteAll()
+                this.addDetail()
+            } else {
+                if (this.state.new_type === 'Gift') this.editGift()
+                else if (this.state.new_type === 'Discount') this.editDiscount()
+            }
+            this.props.history.push('/manage')
         }
-        this.props.history.push('/manage')
     }
     getPro = async () => {
         const response = await fetch('/api/get_promotion', {
@@ -107,10 +111,10 @@ class Edit extends Component {
         }
         await this.setState({
             ID: results['PromotionID'],
-            name: results['PromotionName'],
-            desc: results['PromotionDesc'],
-            type: results['PromotionType'],
-            new_type: results['PromotionType'],
+            // name: results['PromotionName'],
+            // desc: results['PromotionDesc'],
+            // type: results['PromotionType'],
+            // new_type: results['PromotionType'],
             discount_item: results['ItemDiscount'],
             discount_percent: results['PercentDiscount'],
             gift_name: results['GiftName'],
@@ -147,7 +151,7 @@ class Edit extends Component {
                                 this.props.location.state.promotionName
                             }
                             onChange={e => {
-                                this.setState({ storeName: e.target.value })
+                                this.setState({ name: e.target.value })
                             }}
                         />
                     </div>
