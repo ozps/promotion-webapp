@@ -111,8 +111,8 @@ class Edit extends Component {
             ID: results['PromotionID'],
             // name: results['PromotionName'],
             // desc: results['PromotionDesc'],
-            // type: results['PromotionType'],
-            // new_type: results['PromotionType'],
+            type: results['PromotionType'],
+            new_type: results['PromotionType'],
             discount_item: results['ItemDiscount'],
             discount_percent: results['PercentDiscount'],
             gift_name: results['GiftName'],
@@ -176,7 +176,7 @@ class Edit extends Component {
                             type="radio"
                             name="inlineRadioOptions"
                             value="Discount"
-                            checked={this.state.new_type === 'Discount'}
+                            // checked={this.state.new_type === 'Discount'}
                             onChange={() =>
                                 this.setState({ new_type: 'Discount' })
                             }
@@ -191,7 +191,7 @@ class Edit extends Component {
                             type="radio"
                             name="inlineRadioOptions"
                             value="Gift"
-                            checked={this.state.new_type === 'Gift'}
+                            // checked={this.state.new_type === 'Gift'}
                             onChange={() => this.setState({ new_type: 'Gift' })}
                         />
                         <label className="form-check-label">
@@ -204,7 +204,7 @@ class Edit extends Component {
                             type="radio"
                             name="inlineRadioOptions"
                             value="None"
-                            checked={this.state.new_type === ''}
+                            // checked={this.state.new_type === ''}
                             onChange={() => this.setState({ new_type: '' })}
                         />
                         <label className="form-check-label">
