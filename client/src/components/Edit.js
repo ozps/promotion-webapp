@@ -112,7 +112,7 @@ class Edit extends Component {
             // name: results['PromotionName'],
             // desc: results['PromotionDesc'],
             type: results['PromotionType'],
-            new_type: results['PromotionType'],
+            // new_type: results['PromotionType'],
             discount_item: results['ItemDiscount'],
             discount_percent: results['PercentDiscount'],
             gift_name: results['GiftName'],
