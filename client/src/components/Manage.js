@@ -7,7 +7,6 @@ class Manage extends Component {
         this.state = {
             promotion: []
         }
-        // console.log(this.state.promotion.length)
     }
     componentDidMount() {
         if (localStorage.checkSession === '1') this.getProList()
@@ -78,7 +77,6 @@ class Manage extends Component {
         }
     }
     render() {
-        //console.log(localStorage.checkSession)
         return localStorage.checkSession === '1' ? (
             <React.Fragment>
                 <Header isHidden={false} />

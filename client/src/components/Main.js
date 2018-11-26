@@ -6,18 +6,14 @@ class Main extends Component {
         super(props)
         this.state = {
             query: '',
-            promotion: [],
-            show: false
+            promotion: []
         }
     }
     componentDidMount() {
         if (localStorage.checkSession === '1') this.sendQuery()
     }
-    handleHide() {
-        this.setState({ show: false })
-    }
     sendQuery = async () => {
-        let temp = await document.querySelector('input').value
+        let temp = document.querySelector('input').value
         const response = await fetch('/api/list_promotion', {
             method: 'POST',
             headers: {
@@ -26,7 +22,7 @@ class Main extends Component {
             body: JSON.stringify({ text: temp })
         })
         const results = await response.json()
-        this.setState({ query: temp, promotion: results })
+        await this.setState({ query: temp, promotion: results })
     }
     renderPromotion = () => {
         if (this.state.promotion !== []) {
@@ -114,6 +110,7 @@ class Main extends Component {
                         </table>
                     </div>
                 )}
+                <div />
             </React.Fragment>
         ) : (
             <h1 className="container">Please Login</h1>

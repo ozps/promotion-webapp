@@ -9,11 +9,11 @@ class Create extends Component {
             name: '',
             desc: '',
             type: '',
-            discount_item: '0',
-            discount_percent: '0',
-            gift_name: '0',
-            gift_weight: '0',
-            gift_stock: '0',
+            discount_item: '',
+            discount_percent: '',
+            gift_name: '',
+            gift_weight: '',
+            gift_stock: '',
             gift_type: '',
             storeID: -1
         }

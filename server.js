@@ -23,15 +23,13 @@ app.post('/api/check_login', (req, res) => {
     let pwd = connection.escape(req.body.pass)
     var sql = `SELECT COUNT(*) as Status FROM User WHERE username=${usr} AND password=${pwd}`
 
-    // For SQL Injection Test : a' or '1=1
+    //// For SQL Injection Test : a' or '1=1
     // var sql = `SELECT COUNT(*) as Status FROM User WHERE username='${
     //     req.body.user
     // }' AND password='${req.body.pass}'`
-    // console.log(sql)
     connection.query(sql, function(error, results) {
         if (error) throw error
         var users = JSON.parse(JSON.stringify(results[0]))
-        //console.log(users.Status)
         res.contentType('application/json')
         res.send(users)
     })
