@@ -233,7 +233,7 @@ class Edit extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label>
-                                        <strong>Percent Discount</strong>
+                                        <strong>Percent Discount (%)</strong>
                                     </label>
                                     <input
                                         type="text"
@@ -288,7 +288,7 @@ class Edit extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label>
-                                        <strong>Weight</strong>
+                                        <strong>Weight (Grams)</strong>
                                     </label>
                                     <input
                                         type="text"
@@ -305,7 +305,7 @@ class Edit extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label>
-                                        <strong>Stock</strong>
+                                        <strong>Stock (Items)</strong>
                                     </label>
                                     <input
                                         type="text"
