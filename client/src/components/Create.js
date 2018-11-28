@@ -56,9 +56,10 @@ class Create extends Component {
     renderStoreList = () => {
         if (this.state.storeList !== []) {
             return this.state.storeList.map(x => {
+                let stname = x.storeString.slice(x.storeString.indexOf(':') + 1)
                 return (
                     <option key={x.storeString} storeid={x.storeID}>
-                        {x.storeString}
+                        {stname}
                     </option>
                 )
             })
