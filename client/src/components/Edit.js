@@ -54,7 +54,7 @@ class Edit extends Component {
                 proID: this.state.ID,
                 name: this.state.gift_name,
                 type: this.state.gift_type,
-                weight: this.state.weight_name,
+                weight: this.state.gift_weight,
                 stock: this.state.gift_stock
             })
         })
